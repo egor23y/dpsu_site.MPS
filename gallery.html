@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галерея - Відділ МПЗ</title>
+    <link rel="stylesheet" href="css/style.css">
+
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-block">
+                    <img src="img/logo/Emblem_of_the_State_Border_Guard_Service_of_Ukraine.svg.png" alt="ДПСУ" class="logo-img">
+                    <div class="header-text">
+                        <h1 class="main-title">Відділ морально-психологічного забезпечення</h1>
+                        <p class="subtitle">Луцький прикордонний загін</p>
+                    </div>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Головна</a></li>
+                        <li><a href="about.html">Про відділ</a></li>
+                        <li><a href="news.html">Новини</a></li>
+                        <li><a href="gallery.html" class="active">Галерея</a></li>
+                        <li><a href="contacts.html">Контакти</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="container">
+            <section class="section">
+                <h2>Фотогалерея</h2>
+                <p class="gallery-intro">
+                    Наша робота в фотографіях. Тренінги, семінари, заходи та буденна діяльність
+                    відділу морально-психологічного забезпечення.
+                </p>
+
+
+                <div id="gallery-root"></div>
+            </section>
+
+
+            <div id="imageModal" class="modal">
+                <span class="modal-close">&times;</span>
+                <img class="modal-content" id="modalImg" alt="Фото галереї">
+                <div class="modal-caption"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Відділ морально-психологічного забезпечення</p>
+                <p>Луцький прикордонний загін ДПСУ</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+
+        const galleryData = [
+            {
+                id: 1,
+                category: 'trainings',
+                title: 'Груповий тренінг',
+                desc: 'Психологічна підготовка',
+                img: 'img/gallery/photo-2023-08-28-15-50-27-7.jpg'
+            },
+            {
+                id: 2,
+                category: 'trainings',
+                title: 'Індивідуальна консультація',
+                desc: 'Робота психолога',
+                img: 'img/gallery/010050q2-56f5_1280x720.jpeg'
+            },
+            {
+                id: 3,
+                category: 'events',
+                title: 'День відкритих дверей',
+                desc: 'Знайомство з відділом',
+                img: 'img/gallery/photo_5411561031370662282_y-1.jpg'
+            },
+            {
+                id: 4,
+                category: 'trainings',
+                title: 'Тренінг стресостійкості',
+                desc: 'Практичні методики',
+                img: 'img/gallery/508766106_3583507291780484_6292911453681241024_n.jpg'
+            },
+            {
+                id: 5,
+                category: 'team',
+                title: 'Наша команда',
+                desc: 'Психологи відділу',
+                img: 'img/gallery/9.jpg'
+            },
+            {
+                id: 6,
+                category: 'events',
+                title: 'Семінар для сімей',
+                desc: 'Підтримка близьких',
+                img: 'img/gallery/ILS_4444-scaled.jpg'
+            },
+            {
+                id: 7,
+                category: 'trainings',
+                title: 'Техніки релаксації',
+                desc: 'Практичне заняття',
+                img: 'img/gallery/relax.jpg'
+            },
+            {
+                id: 8,
+                category: 'events',
+                title: 'Інформаційна кампанія',
+                desc: 'День психічного здоров\'я',
+                img: 'img/gallery/psychological-support.webp'
+            },
+            {
+                id: 9,
+                category: 'team',
+                title: 'Кабінет психолога',
+                desc: 'Комфортна атмосфера',
+                img: 'img/gallery/news_20240405_124851_17123105313.jpg'
+            },
+            {
+                id: 10,
+                category: 'trainings',
+                title: 'Групова терапія',
+                desc: 'Робота з емоціями',
+                img: 'img/gallery/img_5388.jpg'
+            },
+            {
+                id: 11,
+                category: 'events',
+                title: 'Лекція про ПТСР',
+                desc: 'Освітній захід',
+                img: 'img/gallery/img_5390-1024x758.jpg'
+            },
+            {
+                id: 12,
+                category: 'team',
+                title: 'Приміщення відділу',
+                desc: 'Місце, де завжди допоможуть',
+                img: 'img/gallery/61796694_445013849379646_339003864617320448_n.jpg'
+            }
+        ];
+
+       
+        function FilterButton({ filter, currentFilter, onClick, label, count }) {
+            return (
+                <button
+                    className={`filter-btn ${currentFilter === filter ? 'active' : ''}`}
+                    onClick={() => onClick(filter)}
+                >
+                    {label} ({count})
+                </button>
+            );
+        }
+
+
+        function GalleryItem({ item, onClick }) {
+            return (
+                <div className="gallery-item" data-category={item.category}>
+                    <img
+                        src={item.img}
+                        alt={item.title}
+                        onClick={() => onClick(item)}
+                        style={{ cursor: 'pointer' }}
+                    />
+                    <div className="gallery-overlay">
+                        <h4>{item.title}</h4>
+                        <p>{item.desc}</p>
+                    </div>
+                </div>
+            );
+        }
+
+
+        function Gallery() {
+            const [filter, setFilter] = useState('all');
+
+
+            const filteredImages = filter === 'all'
+                ? galleryData
+                : galleryData.filter(item => item.category === filter);
+
+
+            const counts = {
+                all: galleryData.length,
+                trainings: galleryData.filter(i => i.category === 'trainings').length,
+                events: galleryData.filter(i => i.category === 'events').length,
+                team: galleryData.filter(i => i.category === 'team').length
+            };
+
+
+            const openModal = (item) => {
+                const modal = document.getElementById('imageModal');
+                const modalImg = document.getElementById('modalImg');
+                const caption = document.querySelector('.modal-caption');
+
+                modal.style.display = 'block';
+                modalImg.src = item.img;
+                modalImg.alt = item.title;
+                caption.innerHTML = `<strong>${item.title}</strong><br>${item.desc}`;
+            };
+
+            useEffect(() => {
+                const modal = document.getElementById('imageModal');
+                const closeBtn = document.querySelector('.modal-close');
+
+                if (!modal || !closeBtn) return;
+
+                const closeModal = () => {
+                    modal.style.display = 'none';
+                };
+
+                closeBtn.onclick = closeModal;
+
+                modal.onclick = (e) => {
+                    if (e.target === modal) closeModal();
+                };
+
+                const handleKeyDown = (e) => {
+                    if (e.key === 'Escape' && modal.style.display === 'block') {
+                        closeModal();
+                    }
+                };
+
+                document.addEventListener('keydown', handleKeyDown);
+
+                return () => {
+                    document.removeEventListener('keydown', handleKeyDown);
+                };
+            }, []);
+
+            return (
+                <div>
+                    {/* Фільтри */}
+                    <div className="gallery-filter">
+                        <FilterButton
+                            filter="all"
+                            currentFilter={filter}
+                            onClick={setFilter}
+                            label="Всі фото"
+                            count={counts.all}
+                        />
+                        <FilterButton
+                            filter="trainings"
+                            currentFilter={filter}
+                            onClick={setFilter}
+                            label="Тренінги"
+                            count={counts.trainings}
+                        />
+                        <FilterButton
+                            filter="events"
+                            currentFilter={filter}
+                            onClick={setFilter}
+                            label="Заходи"
+                            count={counts.events}
+                        />
+                        <FilterButton
+                            filter="team"
+                            currentFilter={filter}
+                            onClick={setFilter}
+                            label="Наша команда"
+                            count={counts.team}
+                        />
+                    </div>
+
+                    {/* Сітка галереї */}
+                    <div className="gallery-grid">
+                        {filteredImages.map(item => (
+                            <GalleryItem
+                                key={item.id}
+                                item={item}
+                                onClick={openModal}
+                            />
+                        ))}
+                    </div>
+
+                    {/* Показати кількість відфільтрованих фото */}
+                    <p style={{
+                        textAlign: 'center',
+                        marginTop: '20px',
+                        color: 'rgba(255,255,255,0.7)',
+                        fontSize: '14px'
+                    }}>
+                        Показано: {filteredImages.length} {filteredImages.length === 1 ? 'фото' : filteredImages.length < 5 ? 'фотографії' : 'фотографій'}
+                    </p>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('gallery-root'));
+        root.render(<Gallery />);
+    </script>
+</body>
+</html>

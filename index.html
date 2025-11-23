@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Відділ МПЗ - Луцький прикордонний загін</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-block">
+                    <img src="img/logo/Emblem_of_the_State_Border_Guard_Service_of_Ukraine.svg.png" alt="ДПСУ" class="logo-img">
+                    <div class="header-text">
+                        <h1 class="main-title">Відділ морально-психологічного забезпечення</h1>
+                        <p class="subtitle">Луцький прикордонний загін</p>
+                    </div>
+                </div>
+
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="active">Головна</a></li>
+                        <li><a href="about.html">Про відділ</a></li>
+                        <li><a href="news.html">Новини</a></li>
+                        <li><a href="gallery.html">Галерея</a></li>
+                        <li><a href="contacts.html">Контакти</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-slider" id="heroSlider">
+            <div class="slide active">
+                <img src="img/3d719c98edf1461bdf0252fc663864395348d098.png" alt="Підтримка військовослужбовців">
+                <div class="slide-content">
+                    <h2>Ми піклуємося про психологічне здоров'я захисників</h2>
+                    <p>Професійна підтримка та супровід військовослужбовців</p>
+                    <a href="contacts.html" class="btn">Зв'язатися з нами</a>
+                </div>
+            </div>
+
+            <div class="slide">
+                <img src="img/550218630_1116441224001369_7346171255045168255_n.jpg" alt="Психологічні тренінги">
+                <div class="slide-content">
+                    <h2>Тренінги та семінари</h2>
+                    <p>Сучасні методики психологічної підготовки</p>
+                    <a href="about.html" class="btn">Дізнатися більше</a>
+                </div>
+            </div>
+
+            <div class="slide">
+                <img src="img/kakie-lgoty-imeet-zhena-uchastnika-boevyh-dejstvij.jpg.webp" alt="Підтримка родин">
+                <div class="slide-content">
+                    <h2>Підтримка родин військовослужбовців</h2>
+                    <p>Консультації для близьких наших захисників</p>
+                    <a href="contacts.html" class="btn">Записатися</a>
+                </div>
+            </div>
+
+            <button class="slider-btn prev" onclick="changeSlide(-1)">❮</button>
+            <button class="slider-btn next" onclick="changeSlide(1)">❯</button>
+
+            <div class="slider-dots">
+                <span class="dot active" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+        </div>
+    </section>
+
+    <main class="content">
+        <div class="container">
+            <section class="section about-preview">
+                <h2>Наші завдання</h2>
+                <ul class="task-list">
+                    <li>Психологічна діагностика та консультування</li>
+                    <li>Формування морально-психологічної стійкості</li>
+                    <li>Патріотичне та морально-етичне виховання</li>
+                    <li>Профілактика стресових станів та адаптація після бойових дій</li>
+                    <li>Підтримка родин військовослужбовців</li>
+                </ul>
+                <a href="about.html" class="link-more">Повна інформація про відділ →</a>
+            </section>
+
+            <section class="section news-preview">
+                <h2>Останні новини</h2>
+                <div class="news-grid">
+                    <article class="news-card">
+                        <h3>Тренінг з психологічної підтримки</h3>
+                        <p class="news-date">15 листопада 2025</p>
+                        <p>Відбувся черговий тренінг для військовослужбовців...</p>
+                    </article>
+                    <article class="news-card">
+                        <h3>День відкритих дверей</h3>
+                        <p class="news-date">10 листопада 2025</p>
+                        <p>Запрошуємо на день відкритих дверей нашого відділу...</p>
+                    </article>
+                    <article class="news-card">
+                        <h3>Нові методики роботи</h3>
+                        <p class="news-date">5 листопада 2025</p>
+                        <p>Впроваджено сучасні методики психологічної підтримки...</p>
+                    </article>
+                </div>
+                <a href="news.html" class="link-more">Всі новини →</a>
+            </section>
+
+            <section class="section support-box">
+                <h3>Потрібна термінова психологічна допомога?</h3>
+                <p>Телефонуйте за номером: <a href="tel:+380337654321">+380 (33) 765-43-21</a></p>
+                <p>Цілодобово, конфіденційно</p>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Відділ морально-психологічного забезпечення</p>
+                <p>Луцький прикордонний загін ДПСУ</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
